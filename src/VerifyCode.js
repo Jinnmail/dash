@@ -6,20 +6,24 @@ import NumberFormat from 'react-number-format';
 
 function VerifyCode(props) {
   const [showSuccessIcon, setShowSuccessIcon] = React.useState(false);
+  let res;
 
   const verifyCodeChanged = async (event) => {
     const inputNumber = event.target.value.replace(/\s/g, '');
     if (Number(inputNumber)) {
-      const res = await fetch(`${process.env.REACT_APP_API}/user/code/resetPasswordTokenVerify`, {
-        method: 'POST', 
-        headers: {'Content-type': 'application/json'}, 
-        body: JSON.stringify({email: localStorage.getItem('email'), token: inputNumber})
-      })
-      // const res = await fetch(`${process.env.REACT_APP_API}/user/code/verifyNoWelcome`, {
-      //   method: 'POST', 
-      //   headers: {'Content-type': 'application/json'}, 
-      //   body: JSON.stringify({email: localStorage.getItem('email'), code: inputNumber, source: localStorage.getItem('prevPath')})
-      // })
+      if (props.history.location.state.prevPath === '/signup') {
+        res = await fetch(`${process.env.REACT_APP_API}/user/code/verify`, {
+          method: 'POST', 
+          headers: {'Content-type': 'application/json'}, 
+          body: JSON.stringify({email: localStorage.getItem('email'), code: inputNumber})
+        })
+      } else {
+        res = await fetch(`${process.env.REACT_APP_API}/user/code/resetPasswordTokenVerify`, {
+          method: 'POST', 
+          headers: {'Content-type': 'application/json'}, 
+          body: JSON.stringify({email: localStorage.getItem('email'), token: inputNumber})
+        })
+      }
       const json = await res.json()
       if (!json.error) {
         setShowSuccessIcon(true)
