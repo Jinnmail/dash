@@ -67,85 +67,85 @@ function RedeemInvite(props) {
     }
   }
 
-  // if (step === 1) {
-  //   content = 
-  //     <Grid 
-  //       container
-  //       direction="row"
-  //       justify="center"
-  //       alignItems="stretch">
-  //       <Grid item xs={4}>
+  if (step === 1) {
+    content = 
+      <Grid 
+        container
+        direction="row"
+        justify="center"
+        alignItems="stretch">
+        <Grid item xs={4}>
           
-  //       </Grid>
-  //       <Grid item xs={4}>
-  //         <h2 style={{textAlign: 'center', color: 'gray'}}>Got a Jinn-For-Life invite?</h2>
-  //       </Grid>
-  //       <Grid item xs={4}></Grid>
-  //       <Grid item xs={1} md={4}></Grid>
-  //       <Grid item xs={10} md={4} style={{textAlign: "center"}}>If you received a Premium invite to our upgraded service, enter your invite code below.</Grid>
-  //       <Grid item xs={1} md={4}></Grid>
-  //       <Grid item xs={12}>&nbsp;</Grid>
-  //       <Grid item xs={1} md={4}>
+        </Grid>
+        <Grid item xs={4}>
+          <h2 style={{textAlign: 'center', color: 'gray'}}>Got a Jinn-For-Life invite?</h2>
+        </Grid>
+        <Grid item xs={4}></Grid>
+        <Grid item xs={1} md={4}></Grid>
+        <Grid item xs={10} md={4} style={{textAlign: "center"}}>If you received a Premium invite to our upgraded service, enter your invite code below.</Grid>
+        <Grid item xs={1} md={4}></Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={1} md={4}>
 
-  //       </Grid>
-  //       <Grid item xs={10} md={4}>
-  //           <Grid container spacing={2}>
-  //             <Grid item xs={12}>
-  //               <TextField label="Invite Code" variant="outlined" fullWidth onChange={onRedeemChanged} />
-  //               {/* <TextField label="" variant="outlined" fullWidth onChange={onEmailChanged} /> */}
-  //             </Grid>
-  //           </Grid>
-  //       </Grid>
-  //       <Grid item xs={1} md={4}>
+        </Grid>
+        <Grid item xs={10} md={4}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField label="Invite Code" variant="outlined" fullWidth onChange={onRedeemChanged} />
+                {/* <TextField label="" variant="outlined" fullWidth onChange={onEmailChanged} /> */}
+              </Grid>
+            </Grid>
+        </Grid>
+        <Grid item xs={1} md={4}>
                 
-  //       </Grid>
-  //       <Grid item xs={12}>
-  //         &nbsp;
-  //       </Grid>
-  //       <Grid item xs={1} md={4}>
+        </Grid>
+        <Grid item xs={12}>
+          &nbsp;
+        </Grid>
+        <Grid item xs={1} md={4}>
 
-  //       </Grid>
-  //       <Grid item xs={11} md={2}>
-  //         {
-  //           recaptcha && 
-  //           <ReCAPTCHA
-  //             size="compact"
-  //             sitekey="6LfoK8MZAAAAAAqzzkWscqJbD0fCizOs13IfOZu9"
-  //             onChange={onRecaptchaSuccess}
-  //           />
-  //         }
-  //       </Grid>
-  //       <Hidden mdUp>
-  //         <Grid item xs={1}>
+        </Grid>
+        <Grid item xs={11} md={2}>
+          {
+            recaptcha && 
+            <ReCAPTCHA
+              size="compact"
+              sitekey="6LfoK8MZAAAAAAqzzkWscqJbD0fCizOs13IfOZu9"
+              onChange={onRecaptchaSuccess}
+            />
+          }
+        </Grid>
+        <Hidden mdUp>
+          <Grid item xs={1}>
             
-  //         </Grid>
-  //       </Hidden>
-  //       <Grid item xs={10} md={2} style={{textAlign: "right"}}>
-  //         <Button variant="outlined" color="primary" onClick={onRedeemClicked} disabled={!allowedToSubmit}>Redeem</Button>
-  //         {/* <Button variant="contained" color="primary" onClick={onRequestCodeClicked} disabled={!allowedToSubmit}>Request code</Button> */}
-  //       </Grid>
-  //       <Grid item xs={1} md={4}>
+          </Grid>
+        </Hidden>
+        <Grid item xs={10} md={2} style={{textAlign: "right"}}>
+          <Button variant="outlined" color="primary" onClick={onRedeemClicked} disabled={!allowedToSubmit}>Redeem</Button>
+          {/* <Button variant="contained" color="primary" onClick={onRequestCodeClicked} disabled={!allowedToSubmit}>Request code</Button> */}
+        </Grid>
+        <Grid item xs={1} md={4}>
           
-  //       </Grid>
-  //       <Grid item xs={12}>&nbsp;</Grid>
-  //       <Grid item xs={1} md={4}>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={1} md={4}>
               
-  //       </Grid>
-  //       <Grid item xs={10} md={4} style={{textAlign: 'center'}}>
-  //         -- No Premium invite? --
-  //         <Grid container>
-  //           <Grid item xs={3} md={4} />
-  //           <Grid item xs={7} md={4} style={{textAlign: 'left'}}>
-  //             <small>Ask around. <i>New Jinnmail Premium</i> users are given a handful of Jinn-For-Life invites to give out.</small>
-  //           </Grid>
-  //           <Grid item xs={2} md={4} />
-  //         </Grid>
-  //       </Grid>
-  //       <Grid item xs={1} md={4}>
+        </Grid>
+        <Grid item xs={10} md={4} style={{textAlign: 'center'}}>
+          -- No Premium invite? --
+          <Grid container>
+            <Grid item xs={3} md={4} />
+            <Grid item xs={7} md={4} style={{textAlign: 'left'}}>
+              <small>Ask around. <i>New Jinnmail Premium</i> users are given a handful of Jinn-For-Life invites to give out.</small>
+            </Grid>
+            <Grid item xs={2} md={4} />
+          </Grid>
+        </Grid>
+        <Grid item xs={1} md={4}>
           
-  //       </Grid>
-  //     </Grid>
-  // } else {
+        </Grid>
+      </Grid>
+  } else {
     content =
       <Grid container>
         <Grid item xs={4}>
@@ -271,7 +271,7 @@ function RedeemInvite(props) {
       //     </Link>
       //   </Grid>
       // </Grid>
-  // }
+  }
 
   return (
     <div>
