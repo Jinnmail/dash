@@ -191,30 +191,48 @@ function RedeemInvite(props) {
   //     </Grid>
   // } else {
     content =
-      <div>
-        <Steps
-          enabled={stepsEnabled}
-          steps={steps}
-          initialStep={initialStep}
-          onExit={onExit}  
-        />
-        <Hints enabled={hintsEnabled} hints={hints} />
-        <div className="controls">
-          <div>
-            <button onClick={toggleSteps}>Toggle Steps</button>
-            <button onClick={addStep}>Add Step</button>
-          </div>
-          <div>
-            <button onClick={toggleHints}>Toggle Hints</button>
-            <button onClick={addHint}>Add Hint</button>
-          </div>
-        </div>
-        <h1 className="hello">Hello,</h1>
-        <hr />
-        <h1 className="world">World!</h1>
-        <hr />
-        <h1 className="alive">It's alive!</h1>
-      </div>
+
+    <div>
+      <Steps
+        enabled={stepsEnabled}
+        steps={steps}
+        initialStep={initialStep}
+        onExit={onExit}  
+      />
+      <Hints enabled={hintsEnabled} hints={hints} />
+      <button onClick={toggleSteps}>Steps</button>
+      <h1 className="hello">Hello,</h1>
+      <hr />
+      <h1 className="world">World!</h1>
+      <hr />
+      <h1 className="alive">It's alive!</h1>
+    </div>
+
+      // <div>
+      //   <Steps
+      //     enabled={stepsEnabled}
+      //     steps={steps}
+      //     initialStep={initialStep}
+      //     onExit={onExit}  
+      //   />
+      //   <Hints enabled={hintsEnabled} hints={hints} />
+      //   <div className="controls">
+      //     <div>
+      //       <button onClick={toggleSteps}>Toggle Steps</button>
+      //       <button onClick={addStep}>Add Step</button>
+      //     </div>
+      //     <div>
+      //       <button onClick={toggleHints}>Toggle Hints</button>
+      //       <button onClick={addHint}>Add Hint</button>
+      //     </div>
+      //   </div>
+      //   <h1 className="hello">Hello,</h1>
+      //   <hr />
+      //   <h1 className="world">World!</h1>
+      //   <hr />
+      //   <h1 className="alive">It's alive!</h1>
+      // </div>
+
       // <Grid container>
       //   <Grid item xs={4}>
 
