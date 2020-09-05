@@ -6,12 +6,16 @@ import store from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import ErrorBoundary from './ErrorBoundary';
+import {ThemeProvider} from '@material-ui/core/styles';
+import theme from './theme';
 
 ReactDOM.render(
   <React.StrictMode>
     <ErrorBoundary>
       <Provider store={store}>
-        <App />
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
       </Provider>
     </ErrorBoundary>
   </React.StrictMode>,

@@ -54,8 +54,8 @@ import {
   Favorite as FavoriteIcon,
   MailOutline as MailOutlineIcon,  
   Refresh as RefreshIcon, 
-  ToggleOn as ToggleOnIcon, 
-  ToggleOff as ToggleOffIcon
+  // ToggleOn as ToggleOnIcon, 
+  // ToggleOff as ToggleOffIcon
 } from '@material-ui/icons';
 
 const tableIcons = {
@@ -226,7 +226,7 @@ function Dashboard() {
           <Switch
             checked={userAlias.status}
             onChange={() => onToggleChange(userAlias.aliasId, userAlias.status)}
-            color="primary"
+            color="secondary"
             inputProps={{'aria-label': 'primary checkbox'}}
           />, 
           // <IconButton>
