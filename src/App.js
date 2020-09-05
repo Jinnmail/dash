@@ -15,28 +15,49 @@ import ManageInvites from './ManageInvites';
 import RedeemInvite from './RedeemInvite';
 
 const App = () => {
+
+  function PrivateRoute({ children, ...rest }) {
+    return (
+      <Route
+        {...rest}
+        render={({ location }) =>
+          LoginUtil.loggedIn() ? (
+            children
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/signup",
+                state: { from: location }
+              }}
+            />
+          )
+        }
+      />
+    );
+  }
+  
   return (
     <div>
       <Router>
         <Switch>
-          <Route exact path={["/forgot-password", "/dashboard/change-password"]}>
+          {/* <Route exact path={["/forgot-password", "/dashboard/change-password"]}>
             <ForgotPassword />
           </Route>
           <Route exact path={["/forgot-password-set", "/dashboard/change-password-set"]}>
             <ForgotPasswordSet />
-          </Route>
-          <Route path="/account">
-            {LoginUtil.loggedIn() ? <Account /> : <Redirect push to="/login" />} 
-          </Route>
+          </Route> */}
+          <PrivateRoute path='/account'>
+            <Account /> 
+          </PrivateRoute>
           <Route path="/verify-code">
             <VerifyCode />
           </Route>
-          <Route exact path="/dashboard">
+          <PrivateRoute exact path="/dashboard">
             <Dashboard />
-          </Route>
-          <Route path="/invites">
-            {LoginUtil.loggedIn() ? <ManageInvites /> : <Redirect push to="/login" />} 
-          </Route>
+          </PrivateRoute>
+          <PrivateRoute exact path='/invites'>
+            <ManageInvites /> 
+          </PrivateRoute>
           <Route path="/login">
             <Login />
           </Route>
@@ -46,9 +67,7 @@ const App = () => {
           <Route path="/redeem-invite">
             <RedeemInvite />
           </Route>
-          <Route path="/">
-            {LoginUtil.loggedIn() ? <Redirect to="/dashboard" /> : <Redirect push to="/signup" />}
-          </Route>
+          <Redirect to='/dashboard' />
         </Switch>
       </Router>
     </div>

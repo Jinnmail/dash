@@ -4,9 +4,6 @@ import {Button, Grid, Hidden, IconButton, InputAdornment, LinearProgress, TextFi
 import {Visibility as VisibilityIcon, VisibilityOff as VisibilityOffIcon} from '@material-ui/icons';
 import ReCAPTCHA from "react-google-recaptcha";
 
-console.log(process.env.REACT_APP_API)
-console.log(process.env.NODE_ENV)
-
 const Login = (props) => {
   const [email, setEmail] = React.useState('');
   const [emailErrorText, setEmailErrorText] = React.useState('');
@@ -48,7 +45,8 @@ const Login = (props) => {
     setAllowedToSubmit(true);
   }
 
-  const onLoginClick = async () => {
+  const onLoginClick = async (event) => {
+    event.preventDefault()
     if (allowedToSubmit) {
       setSubmitting(true);
       const res = await fetch(`${process.env.REACT_APP_API}/user/session`, {
@@ -59,7 +57,6 @@ const Login = (props) => {
       const json = await res.json();
       if (!json.error) {
         localStorage.setItem("jinnmailToken", json.data.sessionToken);
-        // props.setRedirectTrue()
         props.history.push('/dashboard');
       } else {
         setFailedLogin(failedLogin => failedLogin + 1);

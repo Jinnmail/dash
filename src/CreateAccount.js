@@ -77,7 +77,6 @@ function Signup(props) {
           body: JSON.stringify({email: email, password: values.password})
         })
         const json = await res.json();
-        console.log(json)
         if (!json.error) {
           localStorage.setItem('email', email);
           localStorage.setItem('prevPath', '/signup');
