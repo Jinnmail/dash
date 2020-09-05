@@ -59,9 +59,8 @@ const Login = (props) => {
       const json = await res.json();
       if (!json.error) {
         localStorage.setItem("jinnmailToken", json.data.sessionToken);
-        setTimeout(() => {
-          props.history.push('/dashboard');
-        }, 1000)
+        // props.setRedirectTrue()
+        props.history.push('/dashboard');
       } else {
         setFailedLogin(failedLogin => failedLogin + 1);
         if (failedLogin > 1) {

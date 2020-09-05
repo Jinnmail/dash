@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import logo from './logo.svg';
 // import { Counter } from './features/counter/Counter';
 import './App.css';
@@ -17,7 +17,7 @@ import RedeemInvite from './RedeemInvite';
 const App = () => {
   return (
     <div>
-      <BrowserRouter>
+      <Router>
         <Switch>
           <Route exact path={["/forgot-password", "/dashboard/change-password"]}>
             <ForgotPassword />
@@ -32,7 +32,7 @@ const App = () => {
             <VerifyCode />
           </Route>
           <Route exact path="/dashboard">
-            {LoginUtil.loggedIn() ? <Dashboard /> : <Redirect push to="/login" />} 
+            <Dashboard />
           </Route>
           <Route path="/invites">
             {LoginUtil.loggedIn() ? <ManageInvites /> : <Redirect push to="/login" />} 
@@ -50,7 +50,7 @@ const App = () => {
             {LoginUtil.loggedIn() ? <Redirect to="/dashboard" /> : <Redirect push to="/signup" />}
           </Route>
         </Switch>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
