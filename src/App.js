@@ -31,9 +31,11 @@ const App = () => {
           <Route path="/verify-code">
             <VerifyCode />
           </Route>
-          <Route exact path="/dashboard">
-            <Dashboard />
-          </Route>
+          {LoginUtil.loggedIn() && 
+            <Route exact path="/dashboard">
+              <Dashboard />
+            </Route>
+          }
           <Route path="/invites">
             {LoginUtil.loggedIn() ? <ManageInvites /> : <Redirect push to="/login" />} 
           </Route>
