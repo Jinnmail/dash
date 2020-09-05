@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import {Link, withRouter} from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
+import { Steps, Hints } from 'intro.js-react';
+import 'intro.js/introjs.css';
 import {
   Button,
   Divider,  
@@ -20,6 +22,22 @@ function RedeemInvite(props) {
   const [allowedToSubmit, setAllowedToSubmit] = React.useState(false);
   const [step, setStep] = React.useState(1);
 
+  const [stepsEnabled, setStepsEnabled] = React.useState(true);
+  const [initialStep, setInitialStep] = React.useState(0);
+  const [steps, setSteps] = React.useState([{
+    element: ".hello", 
+    intro: "Hello step"
+  }, {
+    element: '.world', 
+    intro: "World step"
+  }]);
+  const [hintsEnabled, setHintsEnabled] = React.useState(true);
+  const [hints, setHints] = React.useState([{
+    element: ".hello", 
+    hint: 'Hello hint', 
+    hintPosition: "middle-right"
+  }])
+
   let content;
 
   useEffect(() => {
@@ -27,6 +45,31 @@ function RedeemInvite(props) {
     var email = atob(url.searchParams.get("e"))
     setEmail(email)
   }, [])
+
+  const onExit = () => {
+    setStepsEnabled(false);
+  }
+
+  const toggleSteps = () => {
+    setStepsEnabled(!stepsEnabled);
+  }
+
+  const toggleHints = () => {
+    setHintsEnabled(!hintsEnabled);
+  }
+
+  const addStep = () => {
+    const newStep = {element: ".alive", intro: 'Alive step'}
+    setSteps({ ...steps, steps: steps.concat(newStep)});
+  }
+
+  const addHint = () => {
+    const newHint = {
+      element: ".alive", 
+      hint: "Alive hint", 
+      hintPosition: "middel-right"
+    }
+  }
 
   const onRedeemChanged = (event) => {
     if (event.target.value.length === 6) {
@@ -147,18 +190,44 @@ function RedeemInvite(props) {
       </Grid>
   } else {
     content =
-      <Grid container>
-        <Grid item xs={4}>
+      <div>
+        <Steps
+          enabled={stepsEnabled}
+          steps={steps}
+          initialStep={initialStep}
+          onExit={onExit}  
+        />
+        <Hints enabled={hintsEnabled} hints={hints} />
+        <div className="controls">
+          <div>
+            <button onClick={toggleSteps}>Toggle Steps</button>
+            <button onClick={addStep}>Add Step</button>
+          </div>
+          <div>
+            <button onClick={toggleHints}>Toggle Hints</button>
+            <button onClick={addHint}>Add Hint</button>
+          </div>
+        </div>
 
-        </Grid>
-        <Grid item xs={4}>
+        <h1 className="hello">Hello,</h1>
+        <hr />
+        <h1 className="world">World!</h1>
+        <hr />
+        <h1 className="alive">It's alive!</h1>
+      </div>
+      // <Grid container>
+      //   <Grid item xs={4}>
+
+      //   </Grid>
+      //   <Grid item xs={4}>
           
-        </Grid>
-        <Grid item xs={4}>
-          <Grid item xs={12}>&nbsp;</Grid>
-          <img src="ext.png" alt="ext" />
-        </Grid>
-      </Grid> 
+      //   </Grid>
+      //   <Grid item xs={4}>
+      //     <Grid item xs={12}>&nbsp;</Grid>
+      //     <img src="ext.png" alt="ext" />
+      //   </Grid>
+      // </Grid> 
+
       // <Grid 
       //   container
       //   direction="row"
