@@ -40,12 +40,12 @@ const App = () => {
     <div>
       <Router>
         <Switch>
-          {/* <Route exact path={["/forgot-password", "/dashboard/change-password"]}>
+          <Route exact path={["/forgot-password", "/dashboard/change-password"]}>
             <ForgotPassword />
           </Route>
           <Route exact path={["/forgot-password-set", "/dashboard/change-password-set"]}>
             <ForgotPasswordSet />
-          </Route> */}
+          </Route>
           <PrivateRoute path='/account'>
             <Account /> 
           </PrivateRoute>
