@@ -34,11 +34,11 @@ function RedeemInvite(props) {
     intro: "Example extension home screen"
   }]);
   const [hintsEnabled, setHintsEnabled] = React.useState(true);
-  const [hints, setHints] = React.useState([{
-    element: ".extBar", 
-    hint: 'Hello hint', 
-    hintPosition: "middle-right"
-  }])
+  // const [hints, setHints] = React.useState([{
+  //   element: ".extBar", 
+  //   hint: 'Hello hint', 
+  //   hintPosition: 'bottom-middle'
+  // }])
 
   const [hasExtension, setHasExtension] = React.useState(false);
 
@@ -80,15 +80,6 @@ function RedeemInvite(props) {
   const addStep = () => {
     const newStep = {element: ".alive", intro: 'Alive step'}
     setSteps(steps.concat(newStep));
-  }
-
-  const addHint = () => {
-    const newHint = {
-      element: ".alive", 
-      hint: "Alive hint", 
-      hintPosition: "middle-right"
-    }
-    setHints(hints.concat(newHint));
   }
 
   const onRedeemChanged = (event) => {
@@ -211,89 +202,94 @@ function RedeemInvite(props) {
   } else {
     content =
       <Grid container>
-        {hasExtension &&
-          <Fragment>
-            <Steps
-              enabled={stepsEnabled}
-              steps={steps}
-              initialStep={initialStep}
-              onExit={onExit}  
-            />
-            {/* <Hints enabled={hintsEnabled} hints={hints} /> */}
-            <Grid item xs={1}></Grid>
-            <Grid item xs={10}>
-              <img className="extBar" src="extbar.png" alt="extbar" />
-            </Grid>
-            <Grid item xs={1}></Grid>
-            <Grid item xs={1}></Grid>
-            <Grid item xs={10}>
-              <img className="ext" src="ext.png" alt="ext" />
-            </Grid>
-            <Grid item xs={1}></Grid> 
-            <Grid item xs={1}></Grid>
-            <Grid item xs={10}>
-              <b>You can now use the extension!</b>
-              <br />
-              Go ahead. Give it a try.
-              <br />
-              <Button variant="outlined" color="primary" fullWidth onClick={toggleSteps}>Open Jinnmail extension</Button>
-            </Grid>
-            <Grid item xs={1}></Grid>
-          </Fragment>
-        }
+        <Grid item xs={1}></Grid>
+        <Grid item xs={10} style={{textAlign: 'center'}}>
+          <h2 style={{color: 'gray', marginBottom: "5px"}}>Camouflage your email address with Jinnmail.</h2>
+          <small>Fight spam, hackers, and surveillance with secret temporary email aliases for every interaction. Keeping your address private and spam-free.</small>
+        </Grid>
+        <Grid item xs={1}></Grid>
         <Grid item xs={12}>&nbsp;</Grid>
+        {hasExtension 
+          ?
+            <Fragment>
+              <Steps
+                enabled={stepsEnabled}
+                steps={steps}
+                initialStep={initialStep}
+                onExit={onExit}  
+              />
+              <Grid item xs={1}></Grid>
+              <Grid item xs={10} style={{textAlign: 'center'}}>
+                <img className="extBar" src="extbar.png" alt="extbar" />
+              </Grid>
+              <Grid item xs={1}></Grid>
+              <Grid item xs={12}>&nbsp;</Grid>
+              <Grid item xs={1}></Grid>
+              <Grid item xs={10} style={{textAlign: 'center'}}>
+                <img className="ext" src="ext.png" alt="ext" />
+              </Grid>
+              <Grid item xs={1}></Grid> 
+              <Grid item xs={12}>&nbsp;</Grid>
+              <Grid item xs={1}></Grid>
+              <Grid item xs={10} style={{textAlign: 'center'}}>
+                <b>You can now use the extension!</b>
+                <br />
+                Go ahead. Give it a try.
+                <br />
+                <Button variant="outlined" color="primary" fullWidth onClick={toggleSteps}>Open Jinnmail extension?</Button>
+              </Grid>
+              <Grid item xs={1}></Grid>
+            </Fragment>
+          :
+            <Fragment>
+              <Grid item xs={12}>&nbsp;</Grid>
+              <Grid item xs={1}></Grid>
+              <Grid item xs={10}>
+                <b>Get the extension</b>
+              </Grid>
+              <Grid item xs={1}></Grid>
+              <Grid item xs={1}></Grid>
+              <Grid item xs={10}>
+                <Button variant="outlined" color="primary" fullWidth onClick={() => {window.open("https://chrome.google.com/webstore/detail/jinnmail-%E2%80%94-privacy-for-yo/nbeghdcngabhmanlobkjlnahdlimiejg/", "_blank")}}>+ Get it for Chrome</Button>
+              </Grid>
+              <Grid item xs={1}></Grid>
+              <Grid item xs={1}></Grid>
+              <Grid item xs={10}>
+                <small>
+                  Jinnmail can still be used without it, but the chrome extension
+                  makes life SO MUCH EASIER.
+                </small>
+              </Grid>
+              <Grid item xs={1}></Grid>
+            </Fragment>
+        }
         <Grid item xs={1}></Grid>
-        <Grid item xs={10}>
-          <b>Get the extension</b>
-        </Grid>
-        <Grid item xs={1}></Grid>
-        <Grid item xs={1}></Grid>
-        <Grid item xs={10}>
-          <Button variant="outlined" color="primary" fullWidth onClick={() => {window.open("https://chrome.google.com/webstore/detail/jinnmail-%E2%80%94-privacy-for-yo/nbeghdcngabhmanlobkjlnahdlimiejg/", "_blank")}}>+ Get it for Chrome</Button>
-        </Grid>
-        <Grid item xs={1}></Grid>
-        <Grid item xs={1}></Grid>
-        <Grid item xs={10}>
-          <small>
-            Jinnmail can still be used without it, but the chrome extension
-            makes life SO MUCH EASIER.
-          </small>
-        </Grid>
-        <Grid item xs={1}></Grid>
-        <Grid item xs={1}></Grid>
-        <Grid item xs={10}>
+        <Grid item xs={10} style={{textAlign: 'center'}}>
           <List>
             <ListItem></ListItem>
             <Divider />
-            <ListItem>
-              <b>-- Create your account --</b>
-            </ListItem>
-            <ListItem>
-              <small>If you received an invite to our upgraded service, enter you invite code here.</small>
-            </ListItem>
-            <ListItem>
-              {/* <Link to="/login" style={{textDecoration: 'none'}}> */}
-              <Button variant="contained" color="primary" fullWidth>
-                <Link to="/login" style={{textDecoration: 'none', color: "white"}}>
-                  Login
-                </Link>    
-              </Button>
-              {/* </Link> */}
-            </ListItem>
-            <ListItem>
-              {/* <Link to="/signup" style={{textDecoration: 'none'}}> */}
-                <Button variant="outlined" color="primary" fullWidth>
-                  <Link to="/signup" style={{textDecoration: 'none', color: "#3f51b5"}}>
-                    Create Account
-                  </Link>
-                </Button>
-              {/* </Link> */}
-            </ListItem>
+            <ListItem></ListItem>
           </List>
         </Grid>
         <Grid item xs={1}>
         
         </Grid>
+        <Grid item xs={1}></Grid>
+        <Grid item xs={10} style={{textAlign: 'center'}}>
+          <b>-- Create your account --</b>
+          <br />
+          <small>If you received an invite to our upgraded service, enter you invite code here.</small>
+        </Grid>
+        <Grid item xs={1}></Grid>
+        <Grid item xs={1}></Grid>
+        <Grid item xs={10} style={{textAlign: 'center'}}>
+          <Button variant="outlined" color="primary" fullWidth>
+            <Link to="/signup" style={{textDecoration: 'none', color: "#3f51b5"}}>
+              Create Account
+            </Link>
+          </Button>
+        </Grid>
+        <Grid item xs={1}></Grid>
         <Grid item xs={1}>
         
         </Grid>
@@ -303,40 +299,44 @@ function RedeemInvite(props) {
         <Grid item xs={1}>
         
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={1}>
+        {hasExtension &&
+          <Fragment>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={1}>
+            
+            </Grid>
+            <Grid item xs={10} style={{textAlign: 'center'}}>
+              <b>-- Or manage your account --</b>
+              <br />
+              <small>View your account and manage your aliases.</small>
+            </Grid>
+            <Grid item xs={1}>
         
-        </Grid>
-        <Grid item xs={10}>
-          <b>-- Or manage your account --</b>
-          <br />
-          <small>View your account and manage your aliases.</small>
-        </Grid>
-        <Grid item xs={1}>
-    
-        </Grid>
-        <Grid item xs={1}>
+            </Grid>
+            <Grid item xs={1}>
+            
+            </Grid>
+            <Grid item xs={10}>
+              
+            </Grid>
+            <Grid item xs={1}>
         
-        </Grid>
-        <Grid item xs={10}>
+            </Grid>
+            <Grid item xs={1}>
+        
+            </Grid>
+            <Grid item xs={10}>
+              <Button variant="contained" color="primary" fullWidth>
+                <Link to="/dashboard" style={{textDecoration: 'none', color: "white"}}>
+                  Account Dashboard
+                </Link>
+              </Button>
+            </Grid>
+            <Grid item xs={1}>
           
-        </Grid>
-        <Grid item xs={1}>
-    
-        </Grid>
-        <Grid item xs={1}>
-    
-        </Grid>
-        <Grid item xs={10}>
-          <Button variant="contained" color="primary" fullWidth>
-            <Link to="/dashboard" style={{textDecoration: 'none', color: "white"}}>
-              Account Dashboard
-            </Link>
-          </Button>
-        </Grid>
-        <Grid item xs={1}>
-      
-        </Grid>
+            </Grid>
+          </Fragment>
+        }
       </Grid>
   }
 
