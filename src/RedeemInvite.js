@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import {Link, withRouter} from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Steps, Hints } from 'intro.js-react';
@@ -14,6 +14,8 @@ import {
   TextField, 
 } from '@material-ui/core';
 
+/*global chrome*/
+
 function RedeemInvite(props) {
   const [redeemCode, setRedeemCode] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -22,14 +24,14 @@ function RedeemInvite(props) {
   const [allowedToSubmit, setAllowedToSubmit] = React.useState(false);
   const [step, setStep] = React.useState(1);
 
-  const [stepsEnabled, setStepsEnabled] = React.useState(true);
+  const [stepsEnabled, setStepsEnabled] = React.useState(false);
   const [initialStep, setInitialStep] = React.useState(0);
   const [steps, setSteps] = React.useState([{
     element: ".extBar", 
-    intro: "Hello step"
+    intro: "Location of extension"
   }, {
     element: '.ext', 
-    intro: "World step"
+    intro: "Example extension home screen"
   }]);
   const [hintsEnabled, setHintsEnabled] = React.useState(true);
   const [hints, setHints] = React.useState([{
@@ -38,12 +40,29 @@ function RedeemInvite(props) {
     hintPosition: "middle-right"
   }])
 
+  const [hasExtension, setHasExtension] = React.useState(false);
+
   let content;
 
   useEffect(() => {
     var url = new URL(window.location.href);
     var email = atob(url.searchParams.get("e"))
     setEmail(email)
+
+    var jinnmailExtensionId = "bhppknhpfgojmppabcbidabbmhmomgag";
+    chrome.runtime.sendMessage(jinnmailExtensionId, { message: "version" },
+      function (reply) {
+        if (reply) {
+          if (reply.version) {
+            setHasExtension(true);
+          }
+        }
+        else {
+          setHasExtension(false);
+        }
+      }
+    );
+
   }, [])
 
   const onExit = () => {
@@ -192,186 +211,133 @@ function RedeemInvite(props) {
   } else {
     content =
       <Grid container>
-        {/* <Hidden smDown>
-          <Grid item md={4}>
-            &nbsp;
-          </Grid>
-        </Hidden> */}
+        {hasExtension &&
+          <Fragment>
+            <Steps
+              enabled={stepsEnabled}
+              steps={steps}
+              initialStep={initialStep}
+              onExit={onExit}  
+            />
+            {/* <Hints enabled={hintsEnabled} hints={hints} /> */}
+            <Grid item xs={1}></Grid>
+            <Grid item xs={10}>
+              <img className="extBar" src="extbar.png" alt="extbar" />
+            </Grid>
+            <Grid item xs={1}></Grid>
+            <Grid item xs={1}></Grid>
+            <Grid item xs={10}>
+              <img className="ext" src="ext.png" alt="ext" />
+            </Grid>
+            <Grid item xs={1}></Grid> 
+            <Grid item xs={1}></Grid>
+            <Grid item xs={10}>
+              <b>You can now use the extension!</b>
+              <br />
+              Go ahead. Give it a try.
+              <br />
+              <Button variant="outlined" color="primary" fullWidth onClick={toggleSteps}>Open Jinnmail extension</Button>
+            </Grid>
+            <Grid item xs={1}></Grid>
+          </Fragment>
+        }
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={1}></Grid>
+        <Grid item xs={10}>
+          <b>Get the extension</b>
+        </Grid>
+        <Grid item xs={1}></Grid>
+        <Grid item xs={1}></Grid>
+        <Grid item xs={10}>
+          <Button variant="outlined" color="primary" fullWidth onClick={() => {window.open("https://chrome.google.com/webstore/detail/jinnmail-%E2%80%94-privacy-for-yo/nbeghdcngabhmanlobkjlnahdlimiejg/", "_blank")}}>+ Get it for Chrome</Button>
+        </Grid>
+        <Grid item xs={1}></Grid>
+        <Grid item xs={1}></Grid>
+        <Grid item xs={10}>
+          <small>
+            Jinnmail can still be used without it, but the chrome extension
+            makes life SO MUCH EASIER.
+          </small>
+        </Grid>
+        <Grid item xs={1}></Grid>
+        <Grid item xs={1}></Grid>
+        <Grid item xs={10}>
+          <List>
+            <ListItem></ListItem>
+            <Divider />
+            <ListItem>
+              <b>-- Create your account --</b>
+            </ListItem>
+            <ListItem>
+              <small>If you received an invite to our upgraded service, enter you invite code here.</small>
+            </ListItem>
+            <ListItem>
+              {/* <Link to="/login" style={{textDecoration: 'none'}}> */}
+              <Button variant="contained" color="primary" fullWidth>
+                <Link to="/login" style={{textDecoration: 'none', color: "white"}}>
+                  Login
+                </Link>    
+              </Button>
+              {/* </Link> */}
+            </ListItem>
+            <ListItem>
+              {/* <Link to="/signup" style={{textDecoration: 'none'}}> */}
+                <Button variant="outlined" color="primary" fullWidth>
+                  <Link to="/signup" style={{textDecoration: 'none', color: "#3f51b5"}}>
+                    Create Account
+                  </Link>
+                </Button>
+              {/* </Link> */}
+            </ListItem>
+          </List>
+        </Grid>
         <Grid item xs={1}>
-          <Steps
-            enabled={stepsEnabled}
-            steps={steps}
-            initialStep={initialStep}
-            onExit={onExit}  
-          />
-          {/* <Hints enabled={hintsEnabled} hints={hints} /> */}
+        
+        </Grid>
+        <Grid item xs={1}>
+        
         </Grid>
         <Grid item xs={10}>
-          <button onClick={toggleSteps}>Steps</button>
+
         </Grid>
-        <Grid item xs={1}></Grid>
-        <Grid item xs={1}></Grid>
+        <Grid item xs={1}>
+        
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={1}>
+        
+        </Grid>
         <Grid item xs={10}>
-          <img className="extBar" src="extbar.png" alt="extbar" />
+          <b>-- Or manage your account --</b>
+          <br />
+          <small>View your account and manage your aliases.</small>
         </Grid>
-        <Grid item xs={1}></Grid>
-        <Grid item xs={1}></Grid>
+        <Grid item xs={1}>
+    
+        </Grid>
+        <Grid item xs={1}>
+        
+        </Grid>
         <Grid item xs={10}>
-          <img className="ext" src="ext.png" alt="ext" />
+          
         </Grid>
-        <Grid item xs={1}></Grid>
+        <Grid item xs={1}>
+    
+        </Grid>
+        <Grid item xs={1}>
+    
+        </Grid>
+        <Grid item xs={10}>
+          <Button variant="contained" color="primary" fullWidth>
+            <Link to="/dashboard" style={{textDecoration: 'none', color: "white"}}>
+              Account Dashboard
+            </Link>
+          </Button>
+        </Grid>
+        <Grid item xs={1}>
+      
+        </Grid>
       </Grid>
-
-      // <div>
-      //   <Steps
-      //     enabled={stepsEnabled}
-      //     steps={steps}
-      //     initialStep={initialStep}
-      //     onExit={onExit}  
-      //   />
-      //   <Hints enabled={hintsEnabled} hints={hints} />
-      //   <div className="controls">
-      //     <div>
-      //       <button onClick={toggleSteps}>Toggle Steps</button>
-      //       <button onClick={addStep}>Add Step</button>
-      //     </div>
-      //     <div>
-      //       <button onClick={toggleHints}>Toggle Hints</button>
-      //       <button onClick={addHint}>Add Hint</button>
-      //     </div>
-      //   </div>
-      //   <h1 className="hello">Hello,</h1>
-      //   <hr />
-      //   <h1 className="world">World!</h1>
-      //   <hr />
-      //   <h1 className="alive">It's alive!</h1>
-      // </div>
-
-      // <Grid container>
-      //   <Grid item xs={4}>
-
-      //   </Grid>
-      //   <Grid item xs={4}>
-          
-      //   </Grid>
-      //   <Grid item xs={4}>
-      //     <Grid item xs={12}>&nbsp;</Grid>
-      //     <img src="ext.png" alt="ext" />
-      //   </Grid>
-      // </Grid> 
-
-      // <Grid 
-      //   container
-      //   direction="row"
-      //   justify="center"
-      //   alignItems="stretch">
-      //   <Grid item xs={4}>
-          
-      //   </Grid>
-      //   <Grid item xs={4}>
-      //     <h2 style={{textAlign: 'center', color: 'gray'}}>Camouflage your email address with Jinnmail.</h2>
-      //   </Grid>
-      //   <Grid item xs={4}></Grid>
-      //   <Grid item xs={1} md={4}></Grid>
-      //   <Grid item xs={10} md={4} style={{textAlign: "center"}}>
-      //     Fight spam, hackers, and surveillance with secret temporary email aliases for every interaction, 
-      //     keeing your address private and spam-free.
-      //   </Grid>
-      //   <Grid item xs={1} md={4}>
-      //     <img src="ext.png" alt="logo" />
-      //   </Grid>
-      //   <Grid item xs={12}>&nbsp;</Grid>
-      //   <Grid item xs={12} style={{textAlign: 'center'}}>
-      //     <b>You can now use the extension!</b>
-      //   </Grid>
-      //   <Grid item xs={12} style={{textAlign: 'center'}}>
-      //     Go ahead. Give it a try.
-      //   </Grid>
-      //   <Grid item xs={12} style={{textAlign: 'center'}}>
-      //     <Button variant="outlined" color="primary">Open Jinnmail extension</Button>
-      //   </Grid>
-      //   <Grid item xs={12}>&nbsp;</Grid>
-      //   <Grid item xs={12} style={{textAlign: 'center'}}>
-      //     <b>Get the extension</b>
-      //   </Grid>
-      //   <Grid item xs={12} style={{textAlign: 'center'}}>
-      //     <Button variant="outlined" color="primary" onClick={() => {window.open("https://chrome.google.com/webstore/detail/jinnmail-%E2%80%94-privacy-for-yo/nbeghdcngabhmanlobkjlnahdlimiejg/", "_blank")}}>+ Get it for Chrome</Button>
-      //   </Grid>
-      //   <Grid item xs={4}></Grid>
-      //   <Grid item xs={4} style={{textAlign: 'center'}}>
-      //     <small>
-      //       Jinnmail can still be used without it, but the chrome extension
-      //       makes lif SO MUCH EASIER.
-      //     </small>
-      //   </Grid>
-      //   <Grid item xs={4}></Grid>
-      //   <Grid item xs={3}></Grid>
-      //   <Grid item xs={6}>
-      //     <List>
-      //       <ListItem></ListItem>
-      //       <Divider />
-      //       <ListItem></ListItem>
-      //     </List>
-      //   </Grid>
-      //   <Grid item xs={3}></Grid>
-      //   <Grid item xs={1} md={4}>
-              
-      //   </Grid>
-      //   <Grid item xs={10} md={4}>
-      //     <p style={{textAlign: 'center'}}>-- Create your account --</p>
-      //   </Grid>
-      //   <Grid item xs={1} md={4}>
-          
-      //   </Grid>
-      //   <Grid item xs={1} md={4}>
-              
-      //   </Grid>
-      //   <Grid item xs={10} md={4} style={{textAlign: 'center'}}>
-      //     <small>If you received an invite to our upgraded service, enter you invite code here.</small>
-      //   </Grid>
-      //   <Grid item xs={1} md={4}>
-          
-      //   </Grid>
-      //   <Grid item xs={4}>
-              
-      //   </Grid>
-      //   <Grid item xs={2} style={{textAlign: 'center'}}>
-      //     <Link to="/login" style={{textDecoration: 'none'}}>
-      //       <Button variant="contained" color="primary">Login</Button>
-      //     </Link>
-      //   </Grid>
-      //   <Grid item xs={2}>
-      //     <Link to="/signup" style={{textDecoration: 'none'}}>
-      //       <Button variant="outlined" color="primary">Create Account</Button>
-      //     </Link>
-      //   </Grid>
-      //   <Grid item xs={4}>
-          
-      //   </Grid>
-      //   <Grid item xs={1} md={4}>
-              
-      //   </Grid>
-      //   <Grid item xs={10} md={4} style={{textAlign: 'center'}}>
-      //     <p>-- Or manage your account --</p>
-      //   </Grid>
-      //   <Grid item xs={1} md={4}>
-          
-      //   </Grid>
-      //   <Grid item xs={1} md={4}>
-              
-      //   </Grid>
-      //   <Grid item xs={10} md={4} style={{textAlign: 'center'}}>
-      //     <small>View your account and manage your aliases.</small>
-      //   </Grid>
-      //   <Grid item xs={1} md={4}>
-          
-      //   </Grid>
-      //   <Grid item xs={12} style={{textAlign: 'center'}}>
-      //     <Link to="/dashboard" style={{textDecoration: 'none'}}>
-      //       <Button variant="contained" color="primary">Account Dashboard</Button>
-      //     </Link>
-      //   </Grid>
-      // </Grid>
   }
 
   return (
