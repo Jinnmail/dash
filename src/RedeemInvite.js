@@ -202,12 +202,12 @@ function RedeemInvite(props) {
   } else {
     content =
       <Grid container>
-        <Grid item xs={1}></Grid>
-        <Grid item xs={10} style={{textAlign: 'center'}}>
+        <Grid item xs={1} md={4}></Grid>
+        <Grid item xs={10} md={4} style={{textAlign: 'center'}}>
           <h2 style={{color: 'gray', marginBottom: "5px"}}>Camouflage your email address with Jinnmail.</h2>
           <small>Fight spam, hackers, and surveillance with secret temporary email aliases for every interaction. Keeping your address private and spam-free.</small>
         </Grid>
-        <Grid item xs={1}></Grid>
+        <Grid item xs={1} md={4}></Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         {hasExtension 
           ?
@@ -230,15 +230,15 @@ function RedeemInvite(props) {
               </Grid>
               <Grid item xs={1}></Grid> 
               <Grid item xs={12}>&nbsp;</Grid>
-              <Grid item xs={1}></Grid>
-              <Grid item xs={10} style={{textAlign: 'center'}}>
+              <Grid item xs={1} md={4}></Grid>
+              <Grid item xs={10} md={4} style={{textAlign: 'center'}}>
                 <b>You can now use the extension!</b>
                 <br />
                 Go ahead. Give it a try.
                 <br />
                 <Button variant="outlined" color="primary" fullWidth onClick={toggleSteps}>Open Jinnmail extension?</Button>
               </Grid>
-              <Grid item xs={1}></Grid>
+              <Grid item xs={1} md={4}></Grid>
             </Fragment>
           :
             <Fragment>
@@ -281,15 +281,15 @@ function RedeemInvite(props) {
           <small>If you received an invite to our upgraded service, enter you invite code here.</small>
         </Grid>
         <Grid item xs={1}></Grid>
-        <Grid item xs={1}></Grid>
-        <Grid item xs={10} style={{textAlign: 'center'}}>
+        <Grid item xs={1} md={4}></Grid>
+        <Grid item xs={10} md={4} style={{textAlign: 'center'}}>
           <Button variant="outlined" color="primary" fullWidth>
             <Link to="/signup" style={{textDecoration: 'none', color: "#3f51b5"}}>
               Create Account
             </Link>
           </Button>
         </Grid>
-        <Grid item xs={1}></Grid>
+        <Grid item xs={1} md={4}></Grid>
         <Grid item xs={1}>
         
         </Grid>
@@ -302,15 +302,15 @@ function RedeemInvite(props) {
         {hasExtension &&
           <Fragment>
             <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={1}>
+            <Grid item xs={1} md={4}>
             
             </Grid>
-            <Grid item xs={10} style={{textAlign: 'center'}}>
+            <Grid item xs={10} md={4} style={{textAlign: 'center'}}>
               <b>-- Or manage your account --</b>
               <br />
               <small>View your account and manage your aliases.</small>
             </Grid>
-            <Grid item xs={1}>
+            <Grid item xs={1} md={4}>
         
             </Grid>
             <Grid item xs={1}>
@@ -322,17 +322,17 @@ function RedeemInvite(props) {
             <Grid item xs={1}>
         
             </Grid>
-            <Grid item xs={1}>
+            <Grid item xs={1} md={4}>
         
             </Grid>
-            <Grid item xs={10}>
+            <Grid item xs={10} md={4}>
               <Button variant="contained" color="primary" fullWidth>
                 <Link to="/dashboard" style={{textDecoration: 'none', color: "white"}}>
                   Account Dashboard
                 </Link>
               </Button>
             </Grid>
-            <Grid item xs={1}>
+            <Grid item xs={1} md={4}>
           
             </Grid>
           </Fragment>
