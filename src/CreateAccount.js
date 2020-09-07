@@ -71,7 +71,7 @@ function Signup(props) {
       setEmailErrorText('Invalid Email')
     } else {
       if (allowedToSubmit) {
-        const res = await fetch(`${process.env.REACT_APP_API}/user`, {
+        const res = await fetch(`${process.env.REACT_APP_API_2}/user`, {
           method: 'POST', 
           headers: {'Content-type': 'application/json'}, 
           body: JSON.stringify({email: email, password: values.password})

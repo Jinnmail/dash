@@ -37,6 +37,7 @@ sudo rm index.html
 sudo git clone x . 
 change environment variables to production values
 REACT_APP_API=https://[api-server]/api/v1
+REACT_APP_API=https://[api-server]/api/v2
 REACT_APP_EMAIL_DOMAIN=@jinnmail.com
 REACT_APP_STRIPE_PUBLIC_KEY=pk_test_q.....
 REACT_APP_UNIT_AMOUNT=9.00
