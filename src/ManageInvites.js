@@ -5,6 +5,14 @@ import {fetchUser, fetchUserInvitesArr} from './userAliasesSlice';
 import {useSelector, useDispatch} from 'react-redux';
 import {LoginUtil} from './LoginUtil';
 import NavBar from './NavBar';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 function ManageInvites(props) {
   const [email, setEmail] = React.useState('');
@@ -14,6 +22,8 @@ function ManageInvites(props) {
 
   const user = useSelector((state) => state.userAliases.user);
   const userInvitesArr = useSelector((state) => state.userAliases.userInvitesArr);
+
+  // const classes = useStyles();
 
   useEffect(() => {
     const userId = JSON.parse(atob(localStorage.getItem("jinnmailToken").split('.')[1])).userId
@@ -96,13 +106,27 @@ function ManageInvites(props) {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <ul>
-            {userInvitesArr.map(userInvite => (
-              <li>{userInvite.email}</li>
-            ))}
-          </ul>
+        <Grid item xs={12} md={6}>
+          <TableContainer component={Paper}>
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Email</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {userInvitesArr.map(userInvite => (
+                  <TableRow>
+                    <TableCell component="th" scope="row">
+                      {userInvite.email}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Grid>
+        <Grid item md={6}></Grid>
       </Grid>
     </Fragment>
   )
