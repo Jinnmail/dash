@@ -23,8 +23,6 @@ function ManageInvites(props) {
   const user = useSelector((state) => state.userAliases.user);
   const userInvitesArr = useSelector((state) => state.userAliases.userInvitesArr);
 
-  // const classes = useStyles();
-
   useEffect(() => {
     const userId = JSON.parse(atob(localStorage.getItem("jinnmailToken").split('.')[1])).userId
     dispatch(fetchUser(userId))

@@ -170,7 +170,7 @@ const userAliasesSlice = createSlice({
     [fetchUserAliases.fulfilled]: (state, action) => {
       state.status = 'succeeded';
       state.userAliases = state.userAliases.concat(action.payload);
-      state.userInvites = 5;
+      // state.userInvites = 5;
     }, 
     [fetchUserAliases.rejected]: (state, action) => {
       state.status = 'failed';
