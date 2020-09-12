@@ -178,7 +178,7 @@ function Signup(props) {
             
       </Grid>
       <Grid item xs={10} md={4}>
-        -- Already have an account? --
+        -- Already have an account? ---
       </Grid>
       <Grid item xs={1} md={4}>
         

@@ -79,3 +79,21 @@ detach from screen
 ctrl a d
 exit
 ```
+
+## Jenkins
+```
+$ ssh-keygen -t rsa -f ~/.ssh/dash-test
+$ cd ~/.ssh
+$ cat dashboard-test.pub
+copy the outputted string
+paste into the gcp console UI edit instance section ssh keys add item 
+$ ssh -i dash-test [whoami]@x.x.x.x
+where whoami is the username
+
+
+sudo su jenkins
+cd /var/www/html
+sudo chown -R $USER /var/www/html
+install nvm and node
+npm i
+```
