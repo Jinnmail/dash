@@ -79,7 +79,7 @@ function Signup(props) {
         const json = await res.json();
         if (!json.error) {
           localStorage.setItem('email', email);
-          localStorage.setItem('prevPath', '/signup');
+          // localStorage.setItem('prevPath', '/signup');
           const location = {
             pathname: '/verify-code',
             state: {prevPath: window.location.pathname}
