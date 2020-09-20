@@ -1257,5 +1257,5 @@ function gTLD(str) {
 } 
 
 export function detectURL(str) {
-  return urlRegEx(str) || gTLD(str); 
+  return (str.startsWith('https://') || str.startsWith ('http://')) && urlRegEx(str) && gTLD(str); 
 }
