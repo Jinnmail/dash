@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import logo from './logo.svg';
 // import { Counter } from './features/counter/Counter';
@@ -13,9 +13,11 @@ import VerifyCode from './VerifyCode';
 import ForgotPasswordSet from './ForgotPasswordSet';
 import ManageInvites from './ManageInvites';
 import RedeemInvite from './RedeemInvite';
+import Checkout from './Checkout';
+import Canceled from './Canceled';
+import Success from './Success';
 
 const App = () => {
-
   function PrivateRoute({ children, ...rest }) {
     return (
       <Route
@@ -35,6 +37,48 @@ const App = () => {
       />
     );
   }
+
+  function PrivateRoute2({ children, ...rest }) {
+    const [loaded, setLoaded] = React.useState(false);
+    const [paid, setPaid] = React.useState(false);
+
+    async function fetchPaid() {
+      const userId = JSON.parse(atob(localStorage.getItem("jinnmailToken").split('.')[1])).userId
+      const res = await fetch(`${process.env.REACT_APP_API}/user/${userId}`, {
+        method: 'GET', 
+        headers: {'Authorization': localStorage.getItem("jinnmailToken")},
+      })
+      const json = await res.json();
+      setPaid(json.premium);
+      setLoaded(true);
+    }
+
+    useEffect(() => {
+      fetchPaid()
+    }, [])
+
+    if (loaded) {
+      return (
+        <Route
+          {...rest}
+          render={({ location }) =>
+            paid ? (
+              children
+            ) : (
+              <Redirect
+                to={{
+                  pathname: "/checkout",
+                  state: { from: location }
+                }}
+              />
+            )
+          }
+        />
+      )
+    } else {
+      return null;
+    }
+  }
   
   return (
     <div>
@@ -46,18 +90,18 @@ const App = () => {
           <Route exact path={["/forgot-password-set", "/dashboard/change-password-set"]}>
             <ForgotPasswordSet />
           </Route>
-          <PrivateRoute path='/account'>
+          <PrivateRoute2 path='/account'>
             <Account /> 
-          </PrivateRoute>
+          </PrivateRoute2>
           <Route path="/verify-code">
             <VerifyCode />
           </Route>
-          <PrivateRoute exact path="/dashboard">
+          <PrivateRoute2 exact path="/dashboard">
             <Dashboard />
-          </PrivateRoute>
-          <PrivateRoute exact path='/invites'>
+          </PrivateRoute2>
+          <PrivateRoute2 exact path='/invites'>
             <ManageInvites /> 
-          </PrivateRoute>
+          </PrivateRoute2>
           <Route path="/login">
             <Login />
           </Route>
@@ -67,6 +111,15 @@ const App = () => {
           <Route path="/redeem-invite">
             <RedeemInvite />
           </Route>
+          <PrivateRoute exact path="/checkout">
+            <Checkout />
+          </PrivateRoute>
+          <Route path="/success.html">
+            <Success />
+          </Route>
+          <Route path="/canceled.html">
+            <Canceled />
+          </Route> 
           <Redirect to='/dashboard' />
         </Switch>
       </Router>

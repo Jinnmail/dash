@@ -202,7 +202,6 @@ const userAliasesSlice = createSlice({
       state.user = action.payload;
     }, 
     [fetchUserInvitesArr.fulfilled]: (state, action) => {
-
       state.userInvitesArr = action.payload;
     }, 
   }
