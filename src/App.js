@@ -120,7 +120,7 @@ const App = () => {
           <Route path="/canceled.html">
             <Canceled />
           </Route> 
-          <Redirect to='/dashboard' />
+          <Redirect to='/login' />
         </Switch>
       </Router>
     </div>
