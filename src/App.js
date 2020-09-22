@@ -16,6 +16,7 @@ import RedeemInvite from './RedeemInvite';
 import Checkout from './Checkout';
 import Canceled from './Canceled';
 import Success from './Success';
+import X from './X';
 
 const App = () => {
   function PrivateRoute({ children, ...rest }) {
@@ -120,6 +121,9 @@ const App = () => {
           <Route path="/canceled.html">
             <Canceled />
           </Route> 
+          <Route path="/x/:token">
+            <X />
+          </Route>
           <Redirect to='/login' />
         </Switch>
       </Router>
