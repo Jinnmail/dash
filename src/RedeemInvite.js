@@ -34,11 +34,6 @@ function RedeemInvite(props) {
     intro: "Example extension home screen"
   }]);
   const [hintsEnabled, setHintsEnabled] = React.useState(true);
-  // const [hints, setHints] = React.useState([{
-  //   element: ".extBar", 
-  //   hint: 'Hello hint', 
-  //   hintPosition: 'bottom-middle'
-  // }])
 
   const [hasExtension, setHasExtension] = React.useState(false);
 
@@ -49,8 +44,7 @@ function RedeemInvite(props) {
     var email = atob(url.searchParams.get("e"))
     setEmail(email)
 
-    var jinnmailExtensionId = "bhppknhpfgojmppabcbidabbmhmomgag";
-    chrome.runtime.sendMessage(jinnmailExtensionId, { message: "version" },
+    chrome.runtime.sendMessage(process.env.REACT_APP_JM_EXT_ID, { message: "version" },
       function (reply) {
         if (reply) {
           if (reply.version) {

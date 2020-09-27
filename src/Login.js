@@ -4,6 +4,8 @@ import {Button, Grid, Hidden, IconButton, InputAdornment, LinearProgress, TextFi
 import {Visibility as VisibilityIcon, VisibilityOff as VisibilityOffIcon} from '@material-ui/icons';
 import ReCAPTCHA from "react-google-recaptcha";
 
+/*global chrome*/
+
 const Login = (props) => {
   const [email, setEmail] = React.useState('');
   const [emailErrorText, setEmailErrorText] = React.useState('');
@@ -57,6 +59,7 @@ const Login = (props) => {
       const json = await res.json();
       if (!json.error) {
         localStorage.setItem("jinnmailToken", json.data.sessionToken);
+        chrome.runtime.sendMessage(process.env.REACT_APP_JM_EXT_ID, {message: "login", token: json.data.sessionToken}, function (reply) {});
         props.history.push('/dashboard');
       } else {
         setFailedLogin(failedLogin => failedLogin + 1);
