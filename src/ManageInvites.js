@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect} from 'react';
 import {withRouter} from 'react-router-dom';
-import {Button, Grid, TextField} from '@material-ui/core';
+import {Button, Grid, IconButton, TextField} from '@material-ui/core';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 import {fetchUser, fetchUserInvitesArr} from './userAliasesSlice';
 import {useSelector, useDispatch} from 'react-redux';
 import {LoginUtil} from './LoginUtil';
@@ -60,6 +61,17 @@ function ManageInvites(props) {
     }
   }
 
+  const onCopyClick = async (email, inviteCode) => {
+    const e = Buffer.from(email).toString('base64')
+    const str = `<a href="${process.env.REACT_APP_DASHBOARD_URL}/redeem-invite?e=${e}">Redeem</a> and enter your invite code to get free Jinnmail for Life <br /><br /><h2>${inviteCode}</h2>`
+    var aux = document.createElement("input");
+    aux.setAttribute("value", str);
+    document.body.appendChild(aux);
+    aux.select();
+    document.execCommand("copy");
+    document.body.removeChild(aux);
+  }
+
   return (
     <Fragment>
       <Grid container spacing={2}>
@@ -109,14 +121,18 @@ function ManageInvites(props) {
             <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Email</TableCell>
+                  <TableCell>Email Sent</TableCell>
+                  <TableCell>Copy Invite with Code</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {userInvitesArr.map(userInvite => (
                   <TableRow>
-                    <TableCell component="th" scope="row">
+                    <TableCell>
                       {userInvite.email}
+                    </TableCell>
+                    <TableCell >
+                      <IconButton onClick={() => onCopyClick(userInvite.email, userInvite.inviteCode)}><AssignmentIcon></AssignmentIcon></IconButton>
                     </TableCell>
                   </TableRow>
                 ))}
