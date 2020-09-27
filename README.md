@@ -37,11 +37,12 @@ sudo rm index.html
 sudo git clone x . 
 change environment variables to production values
 REACT_APP_API=https://[api-server]/api/v1
-REACT_APP_API=https://[api-server]/api/v2
+REACT_APP_API_2=https://[api-server]/api/v2
 REACT_APP_EMAIL_DOMAIN=@jinnmail.com
 REACT_APP_STRIPE_PUBLIC_KEY=pk_test_q.....
 REACT_APP_UNIT_AMOUNT=9.00
 REACT_APP_CURRENCY=usd
+REACT_APP_JM_EXT_ID=abc......
 install node which comes with npm 
 https://cloud.google.com/nodejs/docs/setup
 nvm install 12.17.0 instead of nvm install stable
