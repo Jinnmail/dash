@@ -273,16 +273,16 @@ function RedeemInvite(props) {
         </Grid>
         <Grid item xs={1}></Grid>
         <Grid item xs={10} style={{textAlign: 'center'}}>
-          <b>-- Create your account --</b>
+          <b>-- Log in to your account --</b>
           <br />
-          <small>If you received an invite to our upgraded service, enter you invite code here.</small>
+          <small>If you received an invite to our upgraded service, Login here.</small>
         </Grid>
         <Grid item xs={1}></Grid>
         <Grid item xs={1} md={4}></Grid>
         <Grid item xs={10} md={4} style={{textAlign: 'center'}}>
           <Button variant="outlined" color="primary" fullWidth>
-            <Link to="/signup" style={{textDecoration: 'none', color: "#3f51b5"}}>
-              Create Account
+            <Link to="/login" style={{textDecoration: 'none', color: "#3f51b5"}}>
+              Log In
             </Link>
           </Button>
         </Grid>
