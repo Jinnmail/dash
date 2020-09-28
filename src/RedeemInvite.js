@@ -44,19 +44,22 @@ function RedeemInvite(props) {
     var email = atob(url.searchParams.get("e"))
     setEmail(email)
 
-    chrome.runtime.sendMessage(process.env.REACT_APP_JM_EXT_ID, { message: "version" },
-      function (reply) {
-        if (reply) {
-          if (reply.version) {
-            setHasExtension(true);
+    try {
+      chrome.runtime.sendMessage(process.env.REACT_APP_JM_EXT_ID, { message: "version" },
+        function (reply) {
+          if (reply) {
+            if (reply.version) {
+              setHasExtension(true);
+            }
+          }
+          else {
+            setHasExtension(false);
           }
         }
-        else {
-          setHasExtension(false);
-        }
-      }
-    );
-
+      );
+    } catch (error) { // chrome.runtime undefined on android chrome browser
+      setHasExtension(false);
+    }
   }, [])
 
   const onExit = () => {

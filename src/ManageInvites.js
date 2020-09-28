@@ -63,7 +63,7 @@ function ManageInvites(props) {
 
   const onCopyClick = async (email, inviteCode) => {
     const e = Buffer.from(email).toString('base64')
-    const str = `<a href="${process.env.REACT_APP_DASHBOARD_URL}/redeem-invite?e=${e}">Redeem</a> and enter your invite code to get free Jinnmail for Life <br /><br /><h2>${inviteCode}</h2>`
+    const str = `Go to ${process.env.REACT_APP_DASHBOARD_URL}/redeem-invite?e=${e} and enter your invite code ${inviteCode} to get free Jinnmail for Life.`
     var aux = document.createElement("input");
     aux.setAttribute("value", str);
     document.body.appendChild(aux);

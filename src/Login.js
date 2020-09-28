@@ -59,7 +59,13 @@ const Login = (props) => {
       const json = await res.json();
       if (!json.error) {
         localStorage.setItem("jinnmailToken", json.data.sessionToken);
-        chrome.runtime.sendMessage(process.env.REACT_APP_JM_EXT_ID, {message: "login", token: json.data.sessionToken}, function (reply) {});
+        try {
+          chrome.runtime.sendMessage(process.env.REACT_APP_JM_EXT_ID, {message: "login", token: json.data.sessionToken}, function (reply) {
+            return
+          });
+        } catch (error) { // chrome.runtime undefined on android chrome browser
+          console.log(error)
+        }
         props.history.push('/dashboard');
       } else {
         setFailedLogin(failedLogin => failedLogin + 1);
