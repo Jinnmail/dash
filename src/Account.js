@@ -119,7 +119,7 @@ function Account(props) {
 
   return (
     <Fragment>
-      <Grid container space={2}>
+      <Grid container>
         <Grid item xs={12}>
           {LoginUtil.loggedIn() && <NavBar />}
         </Grid>

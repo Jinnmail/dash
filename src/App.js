@@ -44,13 +44,15 @@ const App = () => {
     const [paid, setPaid] = React.useState(false);
 
     async function fetchPaid() {
-      const userId = JSON.parse(atob(localStorage.getItem("jinnmailToken").split('.')[1])).userId
-      const res = await fetch(`${process.env.REACT_APP_API}/user/${userId}`, {
-        method: 'GET', 
-        headers: {'Authorization': localStorage.getItem("jinnmailToken")},
-      })
-      const json = await res.json();
-      setPaid(json.premium);
+      if (localStorage.getItem('jinnmailToken')) {
+        const userId = JSON.parse(atob(localStorage.getItem("jinnmailToken").split('.')[1])).userId
+        const res = await fetch(`${process.env.REACT_APP_API}/user/${userId}`, {
+          method: 'GET', 
+          headers: {'Authorization': localStorage.getItem("jinnmailToken")},
+        })
+        const json = await res.json();
+        setPaid(json.premium);
+      }
       setLoaded(true);
     }
 

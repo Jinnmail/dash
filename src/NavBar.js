@@ -63,12 +63,6 @@ const NavBar = (props) => {
 
   return (
     <div className={classes.root}>
-      {/* <FormGroup>
-        <FormControlLabel
-          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
-          label={auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup> */}
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
@@ -76,20 +70,11 @@ const NavBar = (props) => {
           </Typography>
           {auth && (
             <div>
-              {/* <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton> */}
               {mobile 
                 ?
                   <Fragment>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                      <MenuIcon  onClick={handleMenu} />
+                      <MenuIcon onClick={handleMenu} />
                     </IconButton>
                     <Menu
                       id="menu-appbar"
@@ -109,8 +94,6 @@ const NavBar = (props) => {
                       <MenuItem onClick={() => {props.history.push('/dashboard')}}>Dashboard</MenuItem>
                       <MenuItem onClick={() => {props.history.push('/account')}}>My account</MenuItem>
                       <MenuItem onClick={onLogOutClick}>Log Out</MenuItem>
-                      {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
-                      <MenuItem onClick={handleClose}>My account</MenuItem> */}
                     </Menu>
                   </Fragment>
                 :

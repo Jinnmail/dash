@@ -56,19 +56,24 @@ const ForgotPassword = (props) => {
 
   return (
     <Fragment>
-      {LoginUtil.loggedIn() && <NavBar />}
       <Grid 
         container
-        direction="row"
-        justify="center"
-        alignItems="stretch">
-        <Grid item xs={4}>
+        // direction="row"
+        // justify="center"
+        // alignItems="stretch"
+      >
+        <Grid item xs={12}>
+          {LoginUtil.loggedIn() && <NavBar />}
+        </Grid>
+        <Grid item xs={12}>
+          &nbsp;
+        </Grid>
+        <Grid item xs={12}>
           <Button variant="outlined" color="primary" onClick={() => props.history.goBack()}>&lt; Back</Button>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12}>
           <h2 style={{textAlign: 'center', color: 'gray'}}>Change password.</h2>
         </Grid>
-        <Grid item xs={4}></Grid>
         <Grid item xs={1} md={4}></Grid>
         <Grid item xs={10} md={4} style={{textAlign: "center"}}>Receive verification code by entering your email address registered on your Jinnmail account</Grid>
         <Grid item xs={1} md={4}></Grid>
