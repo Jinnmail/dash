@@ -28,7 +28,8 @@ Same as live deployments below
 
 ## First Deployment
 ```
-create new ubuntu 20.04 N1 micro 1/2 gig mem
+create new ubuntu 20.04 g1 small instance 1.7GB, 
+bigger because more libraries built in build process
 sudo apt update
 sudo apt install apache2
 cd /var/www/html
