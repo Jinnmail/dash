@@ -117,10 +117,10 @@ const App = () => {
           <PrivateRoute exact path="/checkout">
             <Checkout />
           </PrivateRoute>
-          <Route path="/success.html">
+          <Route path="/success">
             <Success />
           </Route>
-          <Route path="/canceled.html">
+          <Route path="/canceled">
             <Canceled />
           </Route> 
           <Route path="/x/:token">
