@@ -87,27 +87,6 @@ export const setToggle = createAsyncThunk('userAliases/setToggle', async ({alias
   return userAlias2;
 })
 
-// export const setToggle = createAsyncThunk('userAliases/setToggle', async ({aliasId, newStatus}) => {
-//   const res = await fetch(`${process.env.REACT_APP_API}/alias/status`, {
-//       method: 'PUT',
-//       headers: {
-//         'Content-type': 'application/json', 
-//         'Authorization': localStorage.getItem('jinnmailToken')
-//       }, 
-//       body: JSON.stringify({aliasId: aliasId, status: newStatus}), 
-//   });
-//   const json = await res.json();
-  
-//   const res2 = await fetch(`${process.env.REACT_APP_API}/alias/alias/${aliasId}`, {
-//     method: 'GET', 
-//     headers: {'Authorization': localStorage.getItem('jinnmailToken')}
-//   });
-//   const json2 = await res2.json();
-//   const userAlias2 = json2.data;
-
-//   return userAlias2;
-// })
-
 export const aliasCreated = createAsyncThunk('userAliases/aliasCreated', async aliasId => {
   const res = await fetch(`${process.env.REACT_APP_API}/alias/alias/${aliasId}`, {
     method: 'GET', 
@@ -218,3 +197,24 @@ export const {
 export const selectUserAliases = state => state.userAliases.userAliases;
 
 export default userAliasesSlice.reducer;
+
+// export const setToggle = createAsyncThunk('userAliases/setToggle', async ({aliasId, newStatus}) => {
+//   const res = await fetch(`${process.env.REACT_APP_API}/alias/status`, {
+//       method: 'PUT',
+//       headers: {
+//         'Content-type': 'application/json', 
+//         'Authorization': localStorage.getItem('jinnmailToken')
+//       }, 
+//       body: JSON.stringify({aliasId: aliasId, status: newStatus}), 
+//   });
+//   const json = await res.json();
+
+//   const res2 = await fetch(`${process.env.REACT_APP_API}/alias/alias/${aliasId}`, {
+//     method: 'GET', 
+//     headers: {'Authorization': localStorage.getItem('jinnmailToken')}
+//   });
+//   const json2 = await res2.json();
+//   const userAlias2 = json2.data;
+
+//   return userAlias2;
+// })
