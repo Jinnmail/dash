@@ -65,9 +65,9 @@ const NavBar = (props) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
+          {/* <Typography variant="h6" className={classes.title}>
             Jinnmail
-          </Typography>
+          </Typography> */}
           {auth && (
             <div>
               {mobile 
