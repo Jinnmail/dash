@@ -285,9 +285,9 @@ function Dashboard() {
         <Grid item xs={12}>
           {LoginUtil.loggedIn() && <NavBar />}
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <img src="logo.png" alt="logo" width="250" height="62" />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12}>
           <div>
             <MailOutlineIcon iconStyle={classes.smallIcon} style={{verticalAlign: 'middle', width: 20, height: 20}}></MailOutlineIcon> 

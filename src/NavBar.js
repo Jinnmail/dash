@@ -107,6 +107,8 @@ const NavBar = (props) => {
           )}
         </Toolbar>
       </AppBar>
+      <br />
+      <img src="logo.png" alt="logo" width="250" height="62" />
     </div>
   );
 }
