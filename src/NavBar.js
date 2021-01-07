@@ -100,6 +100,7 @@ const NavBar = (props) => {
                   <div className={classes.headerOptions}>
                     <Button color="inherit" onClick={() => props.history.push('/dashboard')}>Dashboard</Button>
                     <Button color="inherit" onClick={() => {props.history.push('/account')}}>My Account</Button>
+                    <Button color="inherit" onClick={() => { props.history.push('/contact') }}>Contact</Button>
                     <Button color="inherit" onClick={onLogOutClick}>Log Out</Button>
                   </div>
               }

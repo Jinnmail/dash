@@ -17,6 +17,7 @@ import Checkout from './Checkout';
 import Canceled from './Canceled';
 import Success from './Success';
 import X from './X';
+import Contact from './Contact';
 
 const App = () => {
   function PrivateRoute({ children, ...rest }) {
@@ -114,6 +115,9 @@ const App = () => {
           <Route path="/redeem-invite">
             <RedeemInvite />
           </Route>
+          <PrivateRoute2 path="/contact">
+            <Contact />
+          </PrivateRoute2>
           <PrivateRoute exact path="/checkout">
             <Checkout />
           </PrivateRoute>
