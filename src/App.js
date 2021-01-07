@@ -115,9 +115,9 @@ const App = () => {
           <Route path="/redeem-invite">
             <RedeemInvite />
           </Route>
-          <PrivateRoute2 path="/contact">
+          <PrivateRoute path="/contact">
             <Contact />
-          </PrivateRoute2>
+          </PrivateRoute>
           <PrivateRoute exact path="/checkout">
             <Checkout />
           </PrivateRoute>
