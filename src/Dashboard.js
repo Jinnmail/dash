@@ -279,8 +279,8 @@ function Dashboard() {
   }
 
   return (
-    <div style={{maxWidth: "100%", padding: "10px"}}>
-      
+    // <div style={{maxWidth: "100%", padding: "10px"}}>
+    <div>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           {LoginUtil.loggedIn() && <NavBar />}
