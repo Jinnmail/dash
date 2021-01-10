@@ -64,16 +64,22 @@ const NavBar = (props) => {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Toolbar>
-          {/* <Typography variant="h6" className={classes.title}>
+        <Toolbar style={{paddingRight: "0px"}}>
+          <Typography variant="h6" className={classes.title}>
             Jinnmail
-          </Typography> */}
+          </Typography>
           {auth && (
             <div>
               {mobile 
                 ?
                   <Fragment>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                    <IconButton 
+                      edge="start" 
+                      className={classes.menuButton} 
+                      color="inherit" 
+                      aria-label="menu"
+                      style={{marginRight: "0px"}}
+                    >
                       <MenuIcon onClick={handleMenu} />
                     </IconButton>
                     <Menu
