@@ -17,6 +17,7 @@ import Checkout from './Checkout';
 import Canceled from './Canceled';
 import Success from './Success';
 import X from './X';
+import MyInput from './MyInput';
 import Contact from './Contact';
 
 const App = () => {
@@ -129,6 +130,9 @@ const App = () => {
           </Route> 
           <Route path="/x/:token">
             <X />
+          </Route>
+          <Route path="/myinput">
+            <MyInput />
           </Route>
           <Redirect to='/login' />
         </Switch>
