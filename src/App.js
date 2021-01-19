@@ -98,9 +98,9 @@ const App = () => {
           <Route exact path="/account/x/:token">
             <X />
           </Route>
-          <PrivateRoute2 exact path='/account/login'> {/* ext still trys to login to /account/login NOT login */}
+          <Route exact path='/account/login'> {/* ext still tries to login to /account/login NOT login */}
             <Login />
-          </PrivateRoute2>
+          </Route>
           <PrivateRoute2 path='/account'>
             <Account /> 
           </PrivateRoute2>
