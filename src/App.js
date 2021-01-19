@@ -95,6 +95,9 @@ const App = () => {
           <Route exact path={["/forgot-password-set", "/dashboard/change-password-set"]}>
             <ForgotPasswordSet />
           </Route>
+          <Route path="/account/x/:token">
+            <X />
+          </Route>
           <PrivateRoute2 path='/account'>
             <Account /> 
           </PrivateRoute2>
@@ -128,9 +131,6 @@ const App = () => {
           <Route path="/canceled">
             <Canceled />
           </Route> 
-          <Route path="/x/:token">
-            <X />
-          </Route>
           <Route path="/myinput">
             <MyInput />
           </Route>

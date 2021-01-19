@@ -1,16 +1,20 @@
 import React, { useEffect } from 'react';
-import {Redirect, useParams} from 'react-router-dom';
+import {Redirect, useParams, withRouter} from 'react-router-dom';
 
-function X() {
+function X(props) {
   const { token } = useParams();
 
   useEffect(() => {
     localStorage.setItem('jinnmailToken', token)
   }, [])
 
-  return (
-    <Redirect to="/dashboard" />
-  )
+  if (localStorage.getItem('jinnmailToken')) {
+    props.history.push('/dashboard')
+    return <div></div>
+  } else {
+    return <div></div>
+  }
+
 }
 
-export default X;
+export default withRouter(X);
