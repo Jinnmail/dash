@@ -4,9 +4,11 @@ import {Redirect, useParams, withRouter} from 'react-router-dom';
 function X(props) {
   const { token } = useParams();
 
-  useEffect(() => {
-    localStorage.setItem('jinnmailToken', token)
-  }, [])
+  localStorage.setItem('jinnmailToken', token)
+
+  // useEffect(() => {
+  //   localStorage.setItem('jinnmailToken', token)
+  // }, [])
 
   if (localStorage.getItem('jinnmailToken')) {
     props.history.push('/dashboard')
